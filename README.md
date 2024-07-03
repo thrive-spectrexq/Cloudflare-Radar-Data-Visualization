@@ -17,7 +17,7 @@ A Python application to fetch and visualize data from the Cloudflare Radar API.
    . Rename .env.example to .env.
    . Add your Cloudflare API token in the .env file
    ```bash
-    RADAR_API_TOKEN = "your_cloudflare_api_token_here"
+    RADAR_API_TOKEN = "your_cloudflare_radar_api_token_here"
 
 ## Usage
 
@@ -27,12 +27,12 @@ Run the main script to fetch data from multiple endpoints and store it locally:
 The data will be saved in the data/ directory.
 
 ## API Documentation
-For more information on the Cloudflare Radar API, refer to Cloudflare API documentation.
+For more information on the Cloudflare Radar API, refer to [https://developers.cloudflare.com/radar/investigate/]Cloudflare API documentation.
 
 ## Contributing
 Contributions are welcome! Please fork the repository and submit pull requests.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE]LICENSE file for details.
 
  
