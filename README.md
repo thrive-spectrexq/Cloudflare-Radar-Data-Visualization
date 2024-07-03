@@ -21,13 +21,14 @@ A Python application to fetch and visualize data from the Cloudflare Radar API.
 
 ## Usage
 
-Run the main script to fetch data from multiple endpoints and store it locally:
+1. Run the main script to fetch data from multiple endpoints and store it locally:
 
  python main.py
+
 The data will be saved in the data/ directory.
 
 ## API Documentation
-For more information on the Cloudflare Radar API, refer to [https://developers.cloudflare.com/radar/](Cloudflare Radar API documentation).
+For more information on the Cloudflare Radar API, refer to [https://developers.cloudflare.com/radar/] (Cloudflare Radar API documentation).
 
 ## Contributing
 Contributions are welcome! Please fork the repository and submit pull requests.
