@@ -17,6 +17,7 @@ def fetch_data():
         print(data1)
     except Exception as e:
         print(f"Error fetching data from Endpoint 1: {e}")
+        data1 = None
 
     try:
         data2 = endpoint2.fetch_data()
@@ -24,6 +25,7 @@ def fetch_data():
         print(data2)
     except Exception as e:
         print(f"Error fetching data from Endpoint 2: {e}")
+        data2 = None
 
     try:
         data3 = endpoint3.fetch_data()
@@ -31,6 +33,7 @@ def fetch_data():
         print(data3)
     except Exception as e:
         print(f"Error fetching data from Endpoint 3: {e}")
+        data3 = None
 
     try:
         data4 = endpoint4.fetch_data()
@@ -38,6 +41,7 @@ def fetch_data():
         print(data4)
     except Exception as e:
         print(f"Error fetching data from Endpoint 4: {e}")
+        data4 = None
 
     try:
         data5 = endpoint5.fetch_data()
@@ -45,6 +49,7 @@ def fetch_data():
         print(data5)
     except Exception as e:
         print(f"Error fetching data from Endpoint 5: {e}")
+        data5 = None
 
     return data1, data2, data3, data4, data5
 
@@ -61,32 +66,101 @@ def load_data(filename):
     return None
 
 
-def visualize_data(data):
+def visualize_data(endpoint, data):
     if data:
-        # Example visualization for Endpoint 1
-        timestamps = data["result"]["human"]["timestamps"]
-        mobile = data["result"]["human"]["mobile"]
-        desktop = data["result"]["human"]["desktop"]
-        other = data["result"]["human"]["other"]
+        if endpoint == 1:
+            # Visualization for Endpoint 1
+            timestamps = data["result"]["human"]["timestamps"]
+            mobile = data["result"]["human"]["mobile"]
+            desktop = data["result"]["human"]["desktop"]
+            other = data["result"]["human"]["other"]
 
-        df = pd.DataFrame(
-            {
-                "timestamps": pd.to_datetime(timestamps),
-                "mobile": [float(i) for i in mobile],
-                "desktop": [float(i) for i in desktop],
-                "other": [float(i) for i in other],
-            }
-        )
+            df = pd.DataFrame(
+                {
+                    "timestamps": pd.to_datetime(timestamps),
+                    "mobile": [float(i) for i in mobile],
+                    "desktop": [float(i) for i in desktop],
+                    "other": [float(i) for i in other],
+                }
+            )
 
-        plt.figure(figsize=(12, 6))
-        sns.lineplot(data=df, x="timestamps", y="mobile", label="Mobile")
-        sns.lineplot(data=df, x="timestamps", y="desktop", label="Desktop")
-        sns.lineplot(data=df, x="timestamps", y="other", label="Other")
-        plt.title("Traffic Distribution Over Time")
-        plt.xlabel("Time")
-        plt.ylabel("Percentage")
-        plt.legend()
-        plt.show()
+            plt.figure(figsize=(12, 6))
+            sns.lineplot(data=df, x="timestamps", y="mobile", label="Mobile")
+            sns.lineplot(data=df, x="timestamps", y="desktop", label="Desktop")
+            sns.lineplot(data=df, x="timestamps", y="other", label="Other")
+            plt.title("Traffic Distribution Over Time")
+            plt.xlabel("Time")
+            plt.ylabel("Percentage")
+            plt.legend()
+            plt.show()
+
+        elif endpoint == 2:
+            # Visualization for Endpoint 2
+            timestamps = data["result"]["timestamps"]
+            bytes_in = data["result"]["bytesIn"]
+            bytes_out = data["result"]["bytesOut"]
+
+            df = pd.DataFrame(
+                {
+                    "timestamps": pd.to_datetime(timestamps),
+                    "bytes_in": [float(i) for i in bytes_in],
+                    "bytes_out": [float(i) for i in bytes_out],
+                }
+            )
+
+            plt.figure(figsize=(12, 6))
+            sns.lineplot(data=df, x="timestamps", y="bytes_in", label="Bytes In")
+            sns.lineplot(data=df, x="timestamps", y="bytes_out", label="Bytes Out")
+            plt.title("Netflows Over Time")
+            plt.xlabel("Time")
+            plt.ylabel("Bytes")
+            plt.legend()
+            plt.show()
+
+        elif endpoint == 3:
+            # Visualization for Endpoint 3
+            timestamps = data["result"]["timestamps"]
+            attacks = data["result"]["attacks"]
+
+            df = pd.DataFrame(
+                {
+                    "timestamps": pd.to_datetime(timestamps),
+                    "attacks": [float(i) for i in attacks],
+                }
+            )
+
+            plt.figure(figsize=(12, 6))
+            sns.lineplot(data=df, x="timestamps", y="attacks", label="Attacks")
+            plt.title("Layer 7 Attacks Over Time")
+            plt.xlabel("Time")
+            plt.ylabel("Number of Attacks")
+            plt.legend()
+            plt.show()
+
+        elif endpoint == 4:
+            # Visualization for Endpoint 4
+            locations = data["result"]
+            df = pd.DataFrame(locations)
+
+            plt.figure(figsize=(12, 6))
+            sns.barplot(data=df, x="location", y="count")
+            plt.title("Top DNS Locations")
+            plt.xlabel("Location")
+            plt.ylabel("Count")
+            plt.show()
+
+        elif endpoint == 5:
+            # Visualization for Endpoint 5
+            outages = data["result"]
+            df = pd.DataFrame(outages)
+
+            plt.figure(figsize=(12, 6))
+            sns.barplot(data=df, x="start_time", y="duration", hue="region")
+            plt.title("Outages Over Time")
+            plt.xlabel("Start Time")
+            plt.ylabel("Duration")
+            plt.legend()
+            plt.show()
 
 
 if __name__ == "__main__":
@@ -108,8 +182,8 @@ if __name__ == "__main__":
     loaded_data5 = load_data("data/data_endpoint5.json")
 
     # Visualize the loaded data
-    visualize_data(loaded_data1)
-    visualize_data(loaded_data2)
-    visualize_data(loaded_data3)
-    visualize_data(loaded_data4)
-    visualize_data(loaded_data5)
+    visualize_data(1, loaded_data1)
+    visualize_data(2, loaded_data2)
+    visualize_data(3, loaded_data3)
+    visualize_data(4, loaded_data4)
+    visualize_data(5, loaded_data5)
