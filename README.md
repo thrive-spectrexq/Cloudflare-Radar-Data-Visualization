@@ -6,8 +6,8 @@ A Python application to fetch and visualize data from the Cloudflare Radar API.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/thrive-spectre/Cloudflare-Radar-Data-Visualization.git
-   cd Cloudflare-Radar-Data-Visualization
+   git clone https://github.com/thrive-spectre/radarv.git
+   cd radarv
    
 2. Install dependencies:
    ```bash
